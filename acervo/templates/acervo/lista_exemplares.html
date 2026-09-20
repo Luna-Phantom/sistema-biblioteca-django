@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h1>Lista de Exemplares</h1>
+<a href="{% url 'novo_exemplar' %}">Cadastrar Novo Exemplar</a>
+<ul>
+    {% for ex in exemplares %}
+        <li>{{ ex.livro.titulo }} - Tombamento: {{ ex.codigo_tombamento }} (Disponível: {{ ex.disponivel }})</li>
+    {% empty %}
+        <li>Nenhum exemplar cadastrado.</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url 'lista' %}">Voltar para Livros</a>
+{% endblock %}

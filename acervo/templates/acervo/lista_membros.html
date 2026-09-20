@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h1>Lista de Membros</h1>
+<a href="{% url 'novo_membro' %}">Cadastrar Novo Membro</a>
+<ul>
+    {% for membro in membros %}
+        <li>{{ membro.nome }} - {{ membro.email }} ({{ membro.telefone }})</li>
+    {% empty %}
+        <li>Nenhum membro cadastrado.</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url 'lista' %}">Voltar para Livros</a>
+{% endblock %}

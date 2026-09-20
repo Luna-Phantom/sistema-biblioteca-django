@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h2>Cadastrar Membro</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'lista_membros' %}">Voltar</a>
+{% endblock %}
