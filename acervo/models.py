@@ -37,6 +37,19 @@ class Emprestimo(models.Model):
   data_devolucao_prevista = models.DateField()
   data_devolucao_real = models.DateField(null=True, blank=True)
   multa = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+  def save(self, *args, **kwargs):
+    # Se houver data de devolução real e ela for maior que a prevista, calcula o atraso
+    if self.data_devolucao_real and self.data_devolucao_prevista:
+      if self.data_devolucao_real > self.data_devolucao_prevista:
+        dias_atraso = (
+            self.data_devolucao_real - self.data_devolucao_prevista
+        ).days
+        self.multa = (
+            dias_atraso * 5.00
+        ) 
+      else:
+        self.multa = 0.00
+    super().save(*args, **kwargs)
 
   def __str__(self):
     return f'Empréstimo: {self.exemplar.livro.titulo} para {self.membro.nome}'

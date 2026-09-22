@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h1>Sistema de Biblioteca - Menu Principal</h1>
+<p>Selecione abaixo o módulo que deseja gerenciar:</p>
+<ul>
+    <li><a href="{% url 'lista' %}">Gerenciar Livros</a></li>
+    <li><a href="{% url 'lista_membros' %}">Gerenciar Membros</a></li>
+    <li><a href="{% url 'lista_exemplares' %}">Gerenciar Exemplares</a></li>
+    <li><a href="{% url 'lista_emprestimos' %}">Gerenciar Empréstimos</a></li>
+    <li><a href="{% url 'lista_reservas' %}">Gerenciar Reservas</a></li>
+    <li><a href="{% url 'admin:index' %}">Painel Administrativo (Django Admin)</a></li>
+</ul>
+{% endblock %}

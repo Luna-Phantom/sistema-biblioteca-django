@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h1>Lista de Empréstimos</h1>
+<a href="{% url 'novo_emprestimo' %}">Novo Empréstimo</a>
+<ul>
+    {% for e in emprestimos %}
+        <li>
+            {{ e.exemplar.livro.titulo }} emprestado para {{ e.membro.nome }} 
+            (Devolução prevista: {{ e.data_devolucao_prevista }}) 
+            - <strong>Multa: R$ {{ e.multa }}</strong>
+        </li>
+    {% empty %}
+        <li>Nenhum empréstimo cadastrado.</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url 'lista' %}">Voltar para Livros</a>
+{% endblock %}

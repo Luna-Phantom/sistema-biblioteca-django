@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
-
 {% block conteudo %}
-<h1>Acervo de Livros</h1>
+<h1>Lista de Livros</h1>
+
+<!-- Botão de cadastro que faltava -->
+<a href="{% url 'novo_livro' %}">Cadastrar Novo Livro</a>
+
 <ul>
     {% for livro in livros %}
         <li>{{ livro.titulo }} - {{ livro.autor }} ({{ livro.ano }})</li>
@@ -9,4 +12,8 @@
         <li>Nenhum livro cadastrado.</li>
     {% endfor %}
 </ul>
+
+<br>
+<!-- Link para voltar ao Menu Principal -->
+<a href="{% url 'index' %}">Voltar para o Menu Principal</a>
 {% endblock %}

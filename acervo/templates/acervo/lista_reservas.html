@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h1>Lista de Reservas</h1>
+<a href="{% url 'nova_reserva' %}">Nova Reserva</a>
+<ul>
+    {% for r in reservas %}
+        <li>Livro: {{ r.livro.titulo }} - Membro: {{ r.membro.nome }} (Ativa: {{ r.ativa }})</li>
+    {% empty %}
+        <li>Nenhuma reserva cadastrada.</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url 'lista' %}">Voltar para Livros</a>
+{% endblock %}
