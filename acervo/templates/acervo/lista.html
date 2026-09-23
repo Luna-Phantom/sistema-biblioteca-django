@@ -2,18 +2,44 @@
 {% block conteudo %}
 <h1>Lista de Livros</h1>
 
-<!-- Botão de cadastro que faltava -->
+<!-- Formulário de Busca e Filtro (Feature 1) -->
+<form method="GET" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+    <!-- Campo de busca por texto -->
+    <input 
+        type="text" 
+        name="q" 
+        placeholder="Buscar por título ou autor..." 
+        value="{{ request.GET.q }}"
+        style="padding: 8px; width: 250px;"
+    >
+
+    <!-- Filtro por Ano (Atende a exigência do <select>) -->
+<select name="ano" style="padding: 8px;">
+    <option value="">Todos os Anos</option>
+    <option value="1954" {% if request.GET.ano == '1954' %}selected{% endif %}>1954</option>
+    <option value="1999" {% if request.GET.ano == '1999' %}selected{% endif %}>1999</option>
+    <option value="2015" {% if request.GET.ano == '2015' %}selected{% endif %}>2015</option>
+    <option value="2020" {% if request.GET.ano == '2020' %}selected{% endif %}>2020</option>
+    <option value="2024" {% if request.GET.ano == '2024' %}selected{% endif %}>2024</option>
+</select>
+
+    <button type="submit" style="padding: 8px 16px;">Filtrar</button>
+
+    {% if request.GET.q or request.GET.ano %}
+        <a href="{% url 'lista' %}" style="padding: 8px 12px; background: #ddd; text-decoration: none; color: #000; border-radius: 4px;">Limpar</a>
+    {% endif %}
+</form>
+
 <a href="{% url 'novo_livro' %}">Cadastrar Novo Livro</a>
 
 <ul>
     {% for livro in livros %}
         <li>{{ livro.titulo }} - {{ livro.autor }} ({{ livro.ano }})</li>
     {% empty %}
-        <li>Nenhum livro cadastrado.</li>
+        <li>Nenhum livro encontrado para os filtros informados.</li>
     {% endfor %}
 </ul>
 
 <br>
-<!-- Link para voltar ao Menu Principal -->
 <a href="{% url 'index' %}">Voltar para o Menu Principal</a>
 {% endblock %}
