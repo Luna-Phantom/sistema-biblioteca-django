@@ -8,47 +8,101 @@ from .serializers import (
     ReservaSerializer
 )
 
+# função de segurança 
+def org_atual(request):
+    return request.user.perfil.organizacao
+
 # --- LIVROS ---
 class LivroListCreate(generics.ListCreateAPIView):
-    queryset = Livro.objects.all()
     serializer_class = LivroSerializer
 
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Livro.objects.filter(organizacao=org)
+
+    def perform_create(self, serializer):
+        org = org_atual(self.request)
+        serializer.save(organizacao=org) # Injeta a organização (equivalente ao commit=False)
+
 class LivroDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Livro.objects.all()
     serializer_class = LivroSerializer
+
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Livro.objects.filter(organizacao=org)
 
 # --- MEMBROS ---
 class MembroListCreate(generics.ListCreateAPIView):
-    queryset = Membro.objects.all()
     serializer_class = MembroSerializer
 
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Membro.objects.filter(organizacao=org)
+
+    def perform_create(self, serializer):
+        org = org_atual(self.request)
+        serializer.save(organizacao=org)
+
 class MembroDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Membro.objects.all()
     serializer_class = MembroSerializer
+
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Membro.objects.filter(organizacao=org)
 
 # --- EXEMPLARES ---
 class ExemplarListCreate(generics.ListCreateAPIView):
-    queryset = Exemplar.objects.all()
     serializer_class = ExemplarSerializer
 
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Exemplar.objects.filter(organizacao=org)
+
+    def perform_create(self, serializer):
+        org = org_atual(self.request)
+        serializer.save(organizacao=org)
+
 class ExemplarDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Exemplar.objects.all()
     serializer_class = ExemplarSerializer
+
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Exemplar.objects.filter(organizacao=org)
 
 # --- EMPRÉSTIMOS ---
 class EmprestimoListCreate(generics.ListCreateAPIView):
-    queryset = Emprestimo.objects.all()
     serializer_class = EmprestimoSerializer
 
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Emprestimo.objects.filter(organizacao=org)
+
+    def perform_create(self, serializer):
+        org = org_atual(self.request)
+        serializer.save(organizacao=org)
+
 class EmprestimoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Emprestimo.objects.all()
     serializer_class = EmprestimoSerializer
+
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Emprestimo.objects.filter(organizacao=org)
 
 # --- RESERVAS ---
 class ReservaListCreate(generics.ListCreateAPIView):
-    queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
 
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Reserva.objects.filter(organizacao=org)
+
+    def perform_create(self, serializer):
+        org = org_atual(self.request)
+        serializer.save(organizacao=org)
+
 class ReservaDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
+
+    def get_queryset(self):
+        org = org_atual(self.request)
+        return Reserva.objects.filter(organizacao=org)
