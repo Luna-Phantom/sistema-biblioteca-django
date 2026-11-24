@@ -13,4 +13,6 @@ urlpatterns = [
     path('emprestimos/novo/', views.novo_emprestimo, name='novo_emprestimo'),
     path('reservas/', views.lista_reservas, name='lista_reservas'),
     path('reservas/nova/', views.nova_reserva, name='nova_reserva'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/exportar-csv/', views.exportar_csv, name='exportar_csv'),
 ]

@@ -1,4 +1,8 @@
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .dashboard import obter_dados_dashboard
 from .models import Livro, Membro, Exemplar, Emprestimo, Reserva
 from .serializers import (
     LivroSerializer, 
@@ -106,3 +110,11 @@ class ReservaDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         org = org_atual(self.request)
         return Reserva.objects.filter(organizacao=org)
+
+class DashboardApi(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        org = org_atual(request)
+        dados = obter_dados_dashboard(org, request)
+        return Response(dados)

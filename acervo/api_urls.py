@@ -4,7 +4,7 @@ from .api_views import (
     MembroListCreate, MembroDetail,
     ExemplarListCreate, ExemplarDetail,
     EmprestimoListCreate, EmprestimoDetail,
-    ReservaListCreate, ReservaDetail
+    ReservaListCreate, ReservaDetail, DashboardApi
 )
 
 urlpatterns = [
@@ -27,4 +27,7 @@ urlpatterns = [
     # Rotas de Reservas
     path('reservas/', ReservaListCreate.as_view()),
     path('reservas/<int:pk>/', ReservaDetail.as_view()),
+
+    path('dashboard/', DashboardApi.as_view(), name='api_dashboard'),
+    
 ]
