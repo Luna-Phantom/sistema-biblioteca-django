@@ -45,3 +45,13 @@ class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
         fields = ['livro', 'membro']
+
+class PeriodoForm(forms.Form):
+    inicio = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+    )
+    fim = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+    )
